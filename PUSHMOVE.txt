@@ -18,6 +18,58 @@ white black darkgray gray lightgray
 43332
 22222
 
+(Make different from Push)
+MovePlayer
+black
+.....
+.000.
+.0.0.
+.000.
+.....
+
+
+TransientPlayer
+black
+.....
+..0..
+.000.
+..0..
+.....
+
+
+TransientPlayer0
+black
+.000.
+.....
+.....
+.....
+.....
+
+
+TransientPlayer1
+black
+.....
+....0
+....0
+....0
+.....
+
+TransientPlayer2
+black
+.....
+.....
+.....
+.....
+.000.
+
+TransientPlayer3
+black
+.....
+0....
+0....
+0....
+.....
+
 PushPlayer
 black
 .000.
@@ -26,13 +78,6 @@ black
 0.0.0
 .000.
 
-MovePlayer
-black
-.000.
-0.0.0
-00.00
-0.0.0
-.000.
 
 Goal
 black white
@@ -45,12 +90,10 @@ black white
 =======
 LEGEND
 =======
+Player = MovePlayer or TransientPlayer or PushPlayer
 . = Background
-Player = PushPlayer or MovePlayer
-M = MovePlayer
-P = PushPLayer
 , = Floor
-: = MovePlayer and Floor
+; = MovePlayer and Floor
 O = Goal
 
 =======
@@ -61,12 +104,23 @@ SOUNDS
 COLLISIONLAYERS
 ================
 Background
-PushPlayer, Floor, Goal
+PushPlayer, TransientPlayer, Floor, Goal
+TransientPlayer0
+TransientPlayer1
+TransientPlayer2
+TransientPlayer3
 MovePlayer
 
 ======
 RULES
 ======
+
+[ action MovePlayer ] -> [ TransientPlayer TransientPlayer0 TransientPlayer1 TransientPlayer2 TransientPlayer3 ]
+[ action TransientPlayer ] -> [ MovePlayer ]
+[ MovePlayer TransientPlayer0 ] -> [ MovePlayer ]
+[ MovePlayer TransientPlayer1 ] -> [ MovePlayer ]
+[ MovePlayer TransientPlayer2 ] -> [ MovePlayer ]
+[ MovePlayer TransientPlayer3 ] -> [ MovePlayer ]
 
 
 ==============
@@ -80,6 +134,7 @@ LEVELS
 =======
 .........
 .,,,,,,,.
-.,:,,,O,.
+.,;,,,O,.
 .,,,,,,,.
 .........
+
