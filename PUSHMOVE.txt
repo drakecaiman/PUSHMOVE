@@ -116,7 +116,7 @@ RULES
 ======
 
 [ action MovePlayer ] -> [ TransientPlayer TransientPlayer0 TransientPlayer1 TransientPlayer2 TransientPlayer3 ]
-[ action TransientPlayer ] -> [ MovePlayer ]
+[ action TransientPlayer ] -> [ MovePlayer Floor ]
 [ MovePlayer TransientPlayer0 ] -> [ MovePlayer ]
 [ MovePlayer TransientPlayer1 ] -> [ MovePlayer ]
 [ MovePlayer TransientPlayer2 ] -> [ MovePlayer ]
