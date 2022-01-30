@@ -10,7 +10,7 @@ OBJECTS
 Background
 White
 
-Floor
+MoveFloor
 white black darkgray gray lightgray
 44442
 43332
@@ -18,56 +18,20 @@ white black darkgray gray lightgray
 43332
 22222
 
-(Make different from Push)
+PushFloor
+white
+.....
+.....
+.....
+.....
+.....
+
 MovePlayer
 black
 .....
 .000.
 .0.0.
 .000.
-.....
-
-
-TransientPlayer
-black
-.....
-..0..
-.000.
-..0..
-.....
-
-
-TransientPlayer0
-black
-.000.
-.....
-.....
-.....
-.....
-
-
-TransientPlayer1
-black
-.....
-....0
-....0
-....0
-.....
-
-TransientPlayer2
-black
-.....
-.....
-.....
-.....
-.000.
-
-TransientPlayer3
-black
-.....
-0....
-0....
-0....
 .....
 
 PushPlayer
@@ -78,6 +42,13 @@ black
 0.0.0
 .000.
 
+SwitchPlate
+darkgray lightgray white
+00002
+00021
+00211
+02111
+21111
 
 Goal
 black white
@@ -90,10 +61,11 @@ black white
 =======
 LEGEND
 =======
-Player = MovePlayer or TransientPlayer or PushPlayer
-. = Background
-, = Floor
-; = MovePlayer and Floor
+Player = MovePlayer or PushPlayer
+. = PushFloor
+, = MoveFloor
+; = MovePlayer and MoveFloor
+X = SwitchPlate
 O = Goal
 
 =======
@@ -104,24 +76,20 @@ SOUNDS
 COLLISIONLAYERS
 ================
 Background
-PushPlayer, TransientPlayer, Floor, Goal
-TransientPlayer0
-TransientPlayer1
-TransientPlayer2
-TransientPlayer3
-MovePlayer
+MoveFloor
+PushFloor
+SwitchPlate, Goal
+PushPlayer, MovePlayer
 
 ======
 RULES
 ======
 
-[ action MovePlayer ] -> [ TransientPlayer TransientPlayer0 TransientPlayer1 TransientPlayer2 TransientPlayer3 ]
-[ action TransientPlayer ] -> [ MovePlayer Floor ]
-[ MovePlayer TransientPlayer0 ] -> [ MovePlayer ]
-[ MovePlayer TransientPlayer1 ] -> [ MovePlayer ]
-[ MovePlayer TransientPlayer2 ] -> [ MovePlayer ]
-[ MovePlayer TransientPlayer3 ] -> [ MovePlayer ]
+[ > MovePlayer | SwitchPlate ] -> [  | PushPlayer SwitchPlate ]
+[ > PushPlayer | SwitchPlate ] -> [  | MovePlayer SwitchPlate ]
 
+[ > MovePlayer | PushFloor ] -> [ MovePlayer | PushFloor ]
+[ > PushPlayer | MoveFloor ] -> [ > PushPlayer | > MoveFloor ]
 
 ==============
 WINCONDITIONS
@@ -132,9 +100,18 @@ All Player on Goal
 =======
 LEVELS
 =======
+message Move to the goal to complete the level.
+
 .........
 .,,,,,,,.
 .,;,,,O,.
 .,,,,,,,.
 .........
 
+message Move to Switch Plates to change to pusher.
+
+...........
+.,,,...,,,.
+.;,x...xo,.
+.,,,...,,,.
+...........
