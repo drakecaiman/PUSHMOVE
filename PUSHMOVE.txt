@@ -76,10 +76,10 @@ SOUNDS
 COLLISIONLAYERS
 ================
 Background
-MoveFloor
-PushFloor
 SwitchPlate, Goal
-PushPlayer, MovePlayer
+PushFloor
+MoveFloor, PushPlayer
+MovePlayer
 
 ======
 RULES
@@ -90,6 +90,14 @@ RULES
 
 [ > MovePlayer | PushFloor ] -> [ MovePlayer | PushFloor ]
 [ > PushPlayer | MoveFloor ] -> [ > PushPlayer | > MoveFloor ]
+( [ > PushPlayer |  )
+[ > MoveFloor | PushFloor ] -> [ PushFloor | MoveFloor ]
+( [ > MoveFloor | MoveFloor ] -> [ MoveFloor | MoveFloor ] )
+
+[ > MoveFloor | SwitchPlate ] -> [ MoveFloor | SwitchPlate ]
+[ > MoveFloor | Goal ] -> [ MoveFloor | Goal ] 
+
+( Let PushPlayer move to Goal? )
 
 ==============
 WINCONDITIONS
