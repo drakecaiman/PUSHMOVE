@@ -90,6 +90,7 @@ RULES
 
 [ > MovePlayer | PushFloor ] -> [ MovePlayer | PushFloor ]
 [ > PushPlayer | MoveFloor ] -> [ > PushPlayer | > MoveFloor ]
+[ > MoveFloor | MoveFloor ] -> [ > MoveFloor | > MoveFloor ]
 ( [ > PushPlayer |  )
 [ > MoveFloor | PushFloor ] -> [ PushFloor | MoveFloor ]
 ( [ > MoveFloor | MoveFloor ] -> [ MoveFloor | MoveFloor ] )
@@ -116,10 +117,16 @@ message Move to the goal to complete the level.
 .,,,,,,,.
 .........
 
-message Move to Switch Plates to change to pusher.
+message Move to Switch Plates to change to between Mover and Pusher.
 
 ...........
 .,,,...,,,.
 .;,x...xo,.
+.,,,...,,,.
+...........
+
+...........
+.,,,...,,,.
+.;,x...,o,.
 .,,,...,,,.
 ...........
