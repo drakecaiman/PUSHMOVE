@@ -8,7 +8,10 @@ text_color black
 OBJECTS
 ========
 Background
-White
+gray
+
+Wall
+gray
 
 MoveFloor
 white black darkgray gray lightgray
@@ -20,11 +23,11 @@ white black darkgray gray lightgray
 
 PushFloor
 white
-.....
-.....
-.....
-.....
-.....
+00000
+00000
+00000
+00000
+00000
 
 MovePlayer
 black
@@ -62,8 +65,9 @@ black white
 LEGEND
 =======
 Player = MovePlayer or PushPlayer
-. = PushFloor
-, = MoveFloor
+. = Wall
+" = PushFloor
+' = MoveFloor
 ; = MovePlayer and MoveFloor
 X = SwitchPlate
 O = Goal
@@ -78,27 +82,38 @@ COLLISIONLAYERS
 Background
 SwitchPlate, Goal
 PushFloor
-MoveFloor, PushPlayer
+MoveFloor, PushPlayer, Wall
 MovePlayer
 
 ======
 RULES
 ======
-
+( Transform )
 [ > MovePlayer | SwitchPlate ] -> [  | PushPlayer SwitchPlate ]
 [ > PushPlayer | SwitchPlate ] -> [  | MovePlayer SwitchPlate ]
 
+( Keep move player from moving outside move floor )
 [ > MovePlayer | PushFloor ] -> [ MovePlayer | PushFloor ]
-[ > PushPlayer | MoveFloor ] -> [ > PushPlayer | > MoveFloor ]
-[ > MoveFloor | MoveFloor ] -> [ > MoveFloor | > MoveFloor ]
-( [ > PushPlayer |  )
-[ > MoveFloor | PushFloor ] -> [ PushFloor | MoveFloor ]
-( [ > MoveFloor | MoveFloor ] -> [ MoveFloor | MoveFloor ] )
 
+( Prevent pushing while on the Switch Plate )
+[ > PushPlayer SwitchPlate | MoveFloor ] -> [ PushPlayer SwitchPlate | MoveFloor ]
+
+( Push move floor when push player moves into it )
+[ > PushPlayer | MoveFloor ] -> [ > PushPlayer | > MoveFloor ]
+
+( Push move floors together )
+[ > MoveFloor | MoveFloor ] -> [ > MoveFloor | > MoveFloor ]
+
+( Swap push floor and move floor when move floor moves )
+[ > MoveFloor | PushFloor ] -> [ PushFloor | MoveFloor ]
+
+( Prevent move floor from moving into switch plate or goal (as if on same layer) )
 [ > MoveFloor | SwitchPlate ] -> [ MoveFloor | SwitchPlate ]
 [ > MoveFloor | Goal ] -> [ MoveFloor | Goal ] 
 
-( Let PushPlayer move to Goal? )
+( Switch between Mover and Pusher when action button is hit on Switch Plate )
+[ action MovePlayer SwitchPlate ] -> [ PushPlayer SwitchPlate ]
+[ action PushPlayer SwitchPlate ] -> [ MovePlayer SwitchPlate ]
 
 ==============
 WINCONDITIONS
@@ -110,23 +125,36 @@ All Player on Goal
 LEVELS
 =======
 message Move to the goal to complete the level.
+...........
+.""""""""".
+."'''''''".
+."';'''O'".
+."'''''''".
+.""""""""".
+...........
 
-.........
-.,,,,,,,.
-.,;,,,O,.
-.,,,,,,,.
-.........
 
 message Move to Switch Plates to change to between Mover and Pusher.
 
-...........
-.,,,...,,,.
-.;,x...xo,.
-.,,,...,,,.
-...........
+...............
+.""""""""''''".
+."''''"""''''".
+."';'x"""x'o'".
+."''''"""''''".
+.""""""""''''".
+...............
 
-...........
-.,,,...,,,.
-.;,x...,o,.
-.,,,...,,,.
-...........
+message Push floor tiles as the Pusher (when not on the Switch Plate).
+
+...............
+.""""""""''''".
+."''''"""''''".
+."';'x"""''o'".
+."''''"""''''".
+.""""""""''''".
+...............
+
+
+message Switch between Move and Pusher by hitting X on a Switch Plate.
+
+( Make level for switching )
