@@ -94,6 +94,7 @@ RULES
 
 ( Keep move player from moving outside move floor )
 [ > MovePlayer | PushFloor ] -> [ MovePlayer | PushFloor ]
+[ > MovePlayer | Wall ] -> [ MovePlayer | Wall ]
 
 ( Prevent pushing while on the Switch Plate )
 [ > PushPlayer SwitchPlate | MoveFloor ] -> [ PushPlayer SwitchPlate | MoveFloor ]
@@ -136,25 +137,31 @@ message Move to the goal to complete the level.
 
 message Move to Switch Plates to change to between Mover and Pusher.
 
-...............
-.""""""""''''".
-."''''"""''''".
-."';'x"""x'o'".
-."''''"""''''".
-.""""""""''''".
-...............
+..............
+."""""""''''".
+."'''"""''''".
+."';x"""x'o'".
+."'''"""''''".
+."""""""''''".
+..............
 
 message Push floor tiles as the Pusher (when not on the Switch Plate).
 
-...............
-.""""""""''''".
-."''''"""''''".
-."';'x"""''o'".
-."''''"""''''".
-.""""""""''''".
-...............
+..............
+."""""""''''".
+."'''"""''''".
+."';x"""''o'".
+."'''"""''''".
+."""""""''''".
+..............
 
 
 message Switch between Move and Pusher by hitting X on a Switch Plate.
 
-( Make level for switching )
+........
+.;xxx'o.
+........
+
+message Have Fun!
+
+message Level 1
