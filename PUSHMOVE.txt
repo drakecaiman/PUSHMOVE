@@ -69,6 +69,7 @@ Player = MovePlayer or PushPlayer
 " = PushFloor
 ' = MoveFloor
 ; = MovePlayer and MoveFloor
+: = MovePlayer and SwitchPlate
 X = SwitchPlate
 O = Goal
 
@@ -97,7 +98,7 @@ RULES
 [ > MovePlayer | Wall ] -> [ MovePlayer | Wall ]
 
 ( Prevent pushing while on the Switch Plate )
-[ > PushPlayer SwitchPlate | MoveFloor ] -> [ PushPlayer SwitchPlate | MoveFloor ]
+([ > PushPlayer SwitchPlate | MoveFloor ] -> [ PushPlayer SwitchPlate | MoveFloor ])
 
 ( Push move floor when push player moves into it )
 [ > PushPlayer | MoveFloor ] -> [ > PushPlayer | > MoveFloor ]
@@ -125,6 +126,19 @@ All Player on Goal
 =======
 LEVELS
 =======
+
+............
+....""......
+....""'...o.
+......"'x.".
+."":'""'..".
+.""''"""..".
+."""""""""".
+."""""""..".
+."""""""''".
+.""""""'.'x'
+.........'''
+
 message Move to the goal to complete the level.
 ...........
 .""""""""".
@@ -162,20 +176,53 @@ message Switch between Move and Pusher by hitting X on a Switch Plate.
 .;xxx'o.
 ........
 
+
 message Have Fun!
 
 message Level 1
 
-(Level 1)
+...........
+.."""""""".
+..';'"""''.
+.."x'"""'o.
+."""""""''.
+.""x.""""".
+...........
 
 message Level 2
 
-(Level 2)
+..................
+.""x''""."""""""".
+.""'''"".""""""''.
+.""';'"""""""""'o.
+...'''"".""""""''.
+."x''x""."""""""".
+."""".............
+..................
 
 message Level 3
 
-(Level 3)
+..............
+.....""...'''.
+.....';...""'.
+...."x'"''x''.
+...."'."..'"".
+.."x"'."..'"o.
+.."''''"......
+..".".."......
+.."."..x......
+.."x"'''......
+..............
 
 message Level 4
 
-(Level 4)
+( Know When to Switch )
+...........
+.""""""""".
+."'''""""".
+."':'""""".
+."'''""""".
+.""""""""".
+...........
+
+message Fin
