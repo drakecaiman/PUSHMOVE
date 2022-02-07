@@ -127,18 +127,6 @@ All Player on Goal
 LEVELS
 =======
 
-............
-....""......
-....""'...o.
-......"'x.".
-."":'""'..".
-.""''"""..".
-."""""""""".
-."""""""..".
-."""""""''".
-.""""""'.'x'
-.........'''
-
 message Move to the goal to complete the level.
 ...........
 .""""""""".
@@ -147,7 +135,6 @@ message Move to the goal to complete the level.
 ."'''''''".
 .""""""""".
 ...........
-
 
 message Move to Switch Plates to change to between Mover and Pusher.
 
@@ -169,13 +156,11 @@ message Push floor tiles as the Pusher (when not on the Switch Plate).
 ."""""""''''".
 ..............
 
-
 message Switch between Move and Pusher by hitting X on a Switch Plate.
 
 ........
 .;xxx'o.
 ........
-
 
 message Have Fun!
 
@@ -216,13 +201,15 @@ message Level 3
 
 message Level 4
 
-( Know When to Switch )
-...........
-.""""""""".
-."'''""""".
-."':'""""".
-."'''""""".
-.""""""""".
-...........
+............
+....."x.....
+....""'...o.
+....'."'x.".
+.":'"""'..".
+."''""""""'.
+..""""""..".
+.."""""""'x.
+..""""""x...
+............
 
 message Fin
